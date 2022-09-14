@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using quiz_server.data.Data;
 using quiz_server.data.Data.Models;
 using quiz_server.Extensions;
+using quiz_server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,8 @@ new IdentityBuilder(typeof(ApplicationUser), typeof(IdentityRole), builder.Servi
     .AddRoleManager<RoleManager<IdentityRole>>()
     .AddSignInManager<SignInManager<ApplicationUser>>()
     .AddEntityFrameworkStores<QuizDbContext>();
+
+builder.Services.AddTransient<IAccountsService, AccountsService>();
 
 var app = builder.Build();
 

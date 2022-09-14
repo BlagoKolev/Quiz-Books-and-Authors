@@ -15,6 +15,6 @@ namespace quiz_server.data.Data.Models
         //public string Password { get; set; }
         //public string PasswordHash { get; set; }
         public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
-        public int Score { get; set; }
+        public int Score { get; set; } = 0;
     }
 }
