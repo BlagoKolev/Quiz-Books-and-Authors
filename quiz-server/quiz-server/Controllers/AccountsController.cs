@@ -17,21 +17,21 @@ namespace quiz_server.Controllers
         }
 
         [HttpPost]
-        [Route("")]
-        public async Task<IActionResult> Register(UserRegisterDto userToRegister)
+        [Route("register")]
+        public async Task<IActionResult> Register([FromBody] UserRegisterDto userToRegister)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-          var result = await this.accountsService.Register(userToRegister);
+            var result = await this.accountsService.Register(userToRegister);
 
             if (result.Succeeded)
             {
                 return Ok();
             }
-             return RedirectToAction(nameof(Register));
+            return RedirectToAction(nameof(Register));
 
         }
     }

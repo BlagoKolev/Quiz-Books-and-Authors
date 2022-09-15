@@ -6,5 +6,6 @@ namespace quiz_server.Services
     public interface IAccountsService
     {
         Task<IdentityResult> Register(UserRegisterDto userToRegister);
+        //Task<SignInResult> AutoLogin(string email, string password);
     }
 }

@@ -1,16 +1,41 @@
 import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import Center from './Center';
+import { BaseUrl } from '../Constants/Constants';
 
 function Register() {
 
     let [errors, setErrors] = useState({});
 
+
     function onRegister(e) {
         e.preventDefault();
         let formData = new FormData(e.currentTarget);
+        let errorsList = Validate(formData);
        
-        let errors = Validate(formData);
+        if (Object.keys(errorsList).length == 0) {
+
+            registerUser(formData);
+        }
+    }
+
+    function registerUser(formData) {
+        let data = {};
+        data.email = formData.get('email');
+        data.password = formData.get('password');
+
+        fetch(BaseUrl + "api/" + "Accounts/register",
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(data)
+            })
+            .then(function (res) { console.log(res) })
+            .catch(function (res) { console.log(res) })
+       
     }
 
     function Validate(formData) {
@@ -25,7 +50,6 @@ function Register() {
         if (!email) {
             errors.email = 'Email field is required.'
             setErrors(errors);
-            console.log(errors)
         } else if (!mailFormat.test(email)) {
             errors.email = 'Invalid email format.'
             setErrors(errors);
@@ -36,16 +60,18 @@ function Register() {
         } else if (password.length < 6) {
             errors.password = 'Password must be at least 6 symbols.'
             setErrors(errors);
-        } else if (!confirmPassword){
+        } else if (!confirmPassword) {
             errors.confirmPassword = 'Confirm password is reqired.'
             setErrors(errors);
-        }else if (password != confirmPassword){
+        } else if (password != confirmPassword) {
             errors.confirmPassword = 'Password and Confirm password must be the same.'
             setErrors(errors);
         }
-       
+
         return errors;
     }
+
+
 
     return (
         <Center>

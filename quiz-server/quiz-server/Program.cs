@@ -37,6 +37,18 @@ new IdentityBuilder(typeof(ApplicationUser), typeof(IdentityRole), builder.Servi
     .AddSignInManager<SignInManager<ApplicationUser>>()
     .AddEntityFrameworkStores<QuizDbContext>();
 
+var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: myAllowSpecificOrigins,
+            builder =>
+            {
+                builder.WithOrigins("http://localhost:3000")
+                       .AllowAnyHeader()
+                       .AllowAnyMethod();
+            });
+});
+
 builder.Services.AddTransient<IAccountsService, AccountsService>();
 
 var app = builder.Build();
@@ -51,6 +63,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseCors(myAllowSpecificOrigins);
 
 app.UseAuthentication();
 

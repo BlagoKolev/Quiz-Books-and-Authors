@@ -21,7 +21,7 @@ namespace quiz_server.data.Data
 
         }
 
-        public DbSet<ApplicationUser>? Users { get; set; }
+        public override DbSet<ApplicationUser>? Users { get; set; }
         public DbSet<Question>? Questions { get; set; }
         public DbSet<Author>? Authors { get; set; }
     }
