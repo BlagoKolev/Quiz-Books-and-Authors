@@ -12,6 +12,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace quiz_server.Controllers
 {
@@ -22,13 +23,14 @@ namespace quiz_server.Controllers
         private readonly IAccountsService accountsService;
         private readonly JwtConfig jwtConfig;
 
-        public AccountsController(IAccountsService accountsService, IOptionsMonitor<JwtConfig> optionMonitor)
+        public AccountsController(IAccountsService accountsService, 
+            IOptionsMonitor<JwtConfig> optionMonitor)
         {
             this.accountsService = accountsService;
             this.jwtConfig = optionMonitor.CurrentValue;
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         public string Get()
         {
@@ -74,17 +76,48 @@ namespace quiz_server.Controllers
             });
 
         }
-       
+
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userToLogin)
         {
-            var result = await accountsService.AutoLogin(userToLogin);
-            if (result.Succeeded)
+            if (!this.ModelState.IsValid)
             {
-                return Ok();
+                return BadRequest(new RegistrationResponse()
+                {
+                    Errors = new List<string> { "Invalid payload." }
+                });
             }
-            return BadRequest();
+
+            var user = await this.accountsService.GetUserByEmail(userToLogin.Email);
+
+            if (user != null)
+            {
+                var isPasswordMatch = await accountsService.CheckPassword(user, userToLogin.Password);
+                if (isPasswordMatch)
+                {
+                    var newJwtToken = CreateJWT(user);
+                    return Ok(new LoginResponse()
+                    {
+                        Success = true,
+                        Token = newJwtToken
+                    });
+                }
+            }
+
+            return BadRequest(new LoginResponse()
+            {
+                Success = false,
+                Errors = new List<string>() { "Invalid login." }
+            });
+
+            //var result = await accountsService.AutoLogin(userToLogin);
+
+            //if (result.Succeeded)
+            //{
+            //    return Ok();
+            //}
+            //return BadRequest();
         }
 
         private string CreateJWT(ApplicationUser user)

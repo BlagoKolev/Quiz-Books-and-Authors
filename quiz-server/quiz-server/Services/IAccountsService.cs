@@ -7,8 +7,9 @@ namespace quiz_server.Services
     public interface IAccountsService
     {
         Task<IdentityResult> Register(UserRegisterDto userToRegister);
-        Task<SignInResult> AutoLogin(UserLoginDto userToLogin);
+       // Task<SignInResult> AutoLogin(UserLoginDto userToLogin);
         Task<bool> isUserExist(string email);
         Task<ApplicationUser> GetUserByEmail(string email);
+        Task<bool> CheckPassword(ApplicationUser currentUser, string password);
     }
 }

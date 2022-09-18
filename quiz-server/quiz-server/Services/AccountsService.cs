@@ -20,20 +20,24 @@ namespace quiz_server.Services
             this.signInManager = signInManager;
         }
 
-        public async Task<SignInResult> AutoLogin(UserLoginDto userToLogin)
+        //public async Task<SignInResult> AutoLogin(UserLoginDto userToLogin)
+        //{
+        //    //var user = db.Users
+        //    //      .Where(u => u.Email == email)
+        //    //      .FirstOrDefault();
+
+        //    //var canSignIn = await signInManager.CanSignInAsync(user);
+        //    //var result = new SignInResult();
+
+        //    var result = await signInManager.PasswordSignInAsync(userToLogin.Email, userToLogin.Password, false, false);
+
+        //    return result;
+        //}
+
+        public async Task<bool> CheckPassword(ApplicationUser currentUser,string password)
         {
-            //var user = db.Users
-            //      .Where(u => u.Email == email)
-            //      .FirstOrDefault();
-
-            //var canSignIn = await signInManager.CanSignInAsync(user);
-            //var result = new SignInResult();
-
-            var result = await signInManager.PasswordSignInAsync(userToLogin.Email, userToLogin.Password, false, false);
-
-            return result;
+            return await userManager.CheckPasswordAsync(currentUser,password);
         }
-
         public async Task<ApplicationUser> GetUserByEmail(string email)
         {
             return await userManager.FindByEmailAsync(email);

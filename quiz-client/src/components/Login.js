@@ -27,8 +27,9 @@ function Login() {
                 method: "POST",
                 body: JSON.stringify(data)
             })
-            .then(function (res) { console.log(res) })
-            .catch(function (res) { console.log(res) })
+            .then(res => res.json())
+            .then(res => console.log(res))
+            .catch(res => console.log(res))
     }
 
     function Validate(formData) {
