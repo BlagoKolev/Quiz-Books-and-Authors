@@ -20,21 +20,29 @@ namespace quiz_server.Services
             this.signInManager = signInManager;
         }
 
-        //public async Task<SignInResult> AutoLogin(string email, string password)
-        //{
-        //    var user = db.Users
-        //          .Where(u => u.Email == email)
-        //          .FirstOrDefault();
+        public async Task<SignInResult> AutoLogin(UserLoginDto userToLogin)
+        {
+            //var user = db.Users
+            //      .Where(u => u.Email == email)
+            //      .FirstOrDefault();
 
-        //    var canSignIn = await signInManager.CanSignInAsync(user);
-        //    var result = new SignInResult();
-        //    if (canSignIn)
-        //    {
-        //         result = await signInManager.PasswordSignInAsync(email, password, false, false);
-        //    }
-            
-        //    return result;
-        //}
+            //var canSignIn = await signInManager.CanSignInAsync(user);
+            //var result = new SignInResult();
+
+            var result = await signInManager.PasswordSignInAsync(userToLogin.Email, userToLogin.Password, false, false);
+
+            return result;
+        }
+
+        public async Task<ApplicationUser> GetUserByEmail(string email)
+        {
+            return await userManager.FindByEmailAsync(email);
+        }
+
+        public async Task<bool> isUserExist(string email)
+        {
+            return await userManager.FindByEmailAsync(email) != null;
+        }
 
         public async Task<IdentityResult> Register(UserRegisterDto userToRegister)
         {
@@ -46,7 +54,7 @@ namespace quiz_server.Services
             };
 
             IdentityResult result = await userManager.CreateAsync(newUser, userToRegister.Password);
-           
+
             return result;
         }
     }

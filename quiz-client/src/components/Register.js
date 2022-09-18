@@ -1,7 +1,7 @@
 import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import Center from './Center';
-import { BaseUrl } from '../Constants/Constants';
+import { BaseUrl, Accounts, registerEndPoint, loginEndPoint, api } from '../Constants/Constants';
 
 function Register() {
 
@@ -12,19 +12,18 @@ function Register() {
         e.preventDefault();
         let formData = new FormData(e.currentTarget);
         let errorsList = Validate(formData);
-       
-        if (Object.keys(errorsList).length == 0) {
 
+        if (Object.keys(errorsList).length == 0) {
             registerUser(formData);
+            //autoLoginUser(formData);
         }
     }
 
-    function registerUser(formData) {
+    function autoLoginUser(formData) {
         let data = {};
         data.email = formData.get('email');
         data.password = formData.get('password');
-
-        fetch(BaseUrl + "api/" + "Accounts/register",
+        fetch(BaseUrl + api + Accounts + loginEndPoint,
             {
                 headers: {
                     'Accept': 'application/json',
@@ -33,9 +32,42 @@ function Register() {
                 method: "POST",
                 body: JSON.stringify(data)
             })
+            .then(res => res.json())
             .then(function (res) { console.log(res) })
             .catch(function (res) { console.log(res) })
-       
+    }
+
+    function registerUser(formData) {
+        let data = {};
+        data.email = formData.get('email');
+        data.password = formData.get('password');
+
+        fetch(BaseUrl + api + Accounts + registerEndPoint,
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(data)
+            })
+
+            .then(res => res.json())
+            .then(res => console.log(res) )
+            // .then((res) => {
+            //     fetch(BaseUrl + api + Accounts + loginEndPoint,
+            //         {
+            //             headers: {
+            //                 'Accept': 'application/json',
+            //                 'Content-Type': 'application/json'
+            //             },
+            //             method: "POST",
+            //             body: JSON.stringify(data)
+            //         })
+            //         .then(function (res) { console.log(res) })
+            //         .catch(function (res) { console.log(res) })
+            // })
+            .catch(function (res) { console.log(res) })
     }
 
     function Validate(formData) {

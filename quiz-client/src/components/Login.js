@@ -1,6 +1,7 @@
 import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import Center from './Center';
+import { BaseUrl, Accounts, loginEndPoint, api } from '../Constants/Constants';
 
 function Login() {
 
@@ -10,6 +11,24 @@ function Login() {
         e.preventDefault();
         let formData = new FormData(e.currentTarget);
         let errors = Validate(formData);
+        loginUser(formData);
+    }
+
+    function loginUser(formData) {
+        let data = {};
+        data.email = formData.get('email');
+        data.password = formData.get('password');
+        fetch(BaseUrl + api + Accounts + loginEndPoint,
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method: "POST",
+                body: JSON.stringify(data)
+            })
+            .then(function (res) { console.log(res) })
+            .catch(function (res) { console.log(res) })
     }
 
     function Validate(formData) {
