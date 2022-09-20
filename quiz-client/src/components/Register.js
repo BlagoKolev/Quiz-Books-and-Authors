@@ -1,12 +1,13 @@
 import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
-import { useState, useHistory } from 'react';
+import { useState } from 'react';
 import Center from './Center';
-import { BaseUrl, Accounts, registerEndPoint, loginEndPoint, api } from '../Constants/Constants';
+import { BaseUrl, Accounts, registerEndPoint, api } from '../Constants/Constants';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
 
     let [errors, setErrors] = useState({});
-
+    let navigate = useNavigate();
 
     function onRegister(e) {
         e.preventDefault();
@@ -15,26 +16,8 @@ function Register() {
 
         if (Object.keys(errorsList).length == 0) {
             registerUser(formData);
-            //autoLoginUser(formData);
+            navigate("/");
         }
-    }
-
-    function autoLoginUser(formData) {
-        let data = {};
-        data.email = formData.get('email');
-        data.password = formData.get('password');
-        fetch(BaseUrl + api + Accounts + loginEndPoint,
-            {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: JSON.stringify(data)
-            })
-            .then(res => res.json())
-            .then(function (res) { console.log(res) })
-            .catch(function (res) { console.log(res) })
     }
 
     function registerUser(formData) {

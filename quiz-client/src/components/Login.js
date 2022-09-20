@@ -2,20 +2,23 @@ import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/mate
 import { useState } from 'react';
 import Center from './Center';
 import { BaseUrl, Accounts, loginEndPoint, api } from '../Constants/Constants';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
 
     let [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
     function onLogin(e) {
         e.preventDefault();
         let formData = new FormData(e.currentTarget);
         let errors = Validate(formData);
         loginUser(formData);
+        navigate("/")
     }
 
     function loginUser(formData) {
-        
+
         let data = {};
         data.email = formData.get('email');
         data.password = formData.get('password');
