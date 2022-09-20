@@ -10,6 +10,7 @@ function Home() {
             <Link to={'login'}><Button>Login</Button></Link>
             <h3>or Create an account if you do not have one.</h3>
             <Link to={'register'}><Button>Register</Button></Link>
+            <Link to={'test'}><Button>Test</Button></Link>
         </div>
     )
 }

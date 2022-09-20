@@ -15,9 +15,11 @@ function Login() {
     }
 
     function loginUser(formData) {
+        
         let data = {};
         data.email = formData.get('email');
         data.password = formData.get('password');
+
         fetch(BaseUrl + api + Accounts + loginEndPoint,
             {
                 headers: {
@@ -28,8 +30,12 @@ function Login() {
                 body: JSON.stringify(data)
             })
             .then(res => res.json())
-            .then(res => console.log(res))
-            .catch(res => console.log(res))
+            .then(res => {
+                const token = res.token;
+                localStorage.setItem('token', token);
+            })
+            .then(res => console.log(res.token))
+            .catch(res => console.log(res.token))
     }
 
     function Validate(formData) {

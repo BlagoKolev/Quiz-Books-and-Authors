@@ -1,5 +1,5 @@
 import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useState, useHistory } from 'react';
 import Center from './Center';
 import { BaseUrl, Accounts, registerEndPoint, loginEndPoint, api } from '../Constants/Constants';
 
@@ -53,20 +53,10 @@ function Register() {
             })
 
             .then(res => res.json())
-            .then(res => console.log(res) )
-            // .then((res) => {
-            //     fetch(BaseUrl + api + Accounts + loginEndPoint,
-            //         {
-            //             headers: {
-            //                 'Accept': 'application/json',
-            //                 'Content-Type': 'application/json'
-            //             },
-            //             method: "POST",
-            //             body: JSON.stringify(data)
-            //         })
-            //         .then(function (res) { console.log(res) })
-            //         .catch(function (res) { console.log(res) })
-            // })
+            .then(res => {
+                const token = res.token;
+                localStorage.setItem('token', token);
+            })
             .catch(function (res) { console.log(res) })
     }
 

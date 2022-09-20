@@ -23,7 +23,7 @@ namespace quiz_server.Controllers
         private readonly IAccountsService accountsService;
         private readonly JwtConfig jwtConfig;
 
-        public AccountsController(IAccountsService accountsService, 
+        public AccountsController(IAccountsService accountsService,
             IOptionsMonitor<JwtConfig> optionMonitor)
         {
             this.accountsService = accountsService;
@@ -32,9 +32,9 @@ namespace quiz_server.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
-        public string Get()
+        public IActionResult Get()
         {
-            return "Get method";
+            return Ok(new { response = "Success", status = "Ok" });
         }
 
         [HttpPost]
@@ -111,13 +111,6 @@ namespace quiz_server.Controllers
                 Errors = new List<string>() { "Invalid login." }
             });
 
-            //var result = await accountsService.AutoLogin(userToLogin);
-
-            //if (result.Succeeded)
-            //{
-            //    return Ok();
-            //}
-            //return BadRequest();
         }
 
         private string CreateJWT(ApplicationUser user)
@@ -133,7 +126,7 @@ namespace quiz_server.Controllers
                     new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 }),
-                Expires = DateTime.UtcNow.AddDays(1),
+                Expires = DateTime.UtcNow.AddHours(12),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key)
                 , SecurityAlgorithms.HmacSha256Signature)
             };
