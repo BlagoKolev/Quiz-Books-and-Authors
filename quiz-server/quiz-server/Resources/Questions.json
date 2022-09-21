@@ -1,0 +1,75 @@
+﻿[
+  {
+    "Text": "The author of a 'Poor Folk' is:",
+    "AnswerId": 1,
+    "AnswerName": "Fyodor Dostoevsky",
+    "PointsReward": 20
+  },
+  {
+    "Text": "The author of a 'Notes from Underground' is:",
+    "AnswerId": 1,
+    "AnswerName": "Fyodor Dostoevsky",
+    "PointsReward": 20
+  },
+  {
+    "Text": "The author of a 'Crime and Punishment' is:",
+    "AnswerId": 1,
+    "AnswerName": "Fyodor Dostoevsky",
+    "PointsReward": 15
+  },
+  {
+    "Text": "The author of a 'The Idiot' is:",
+    "AnswerId": 1,
+    "AnswerName": "Fyodor Dostoevsky",
+    "PointsReward": 15
+  },
+  {
+    "Text": "The author of a 'The Brothers Karamazov' is:",
+    "AnswerId": 1,
+    "AnswerName": "Fyodor Dostoevsky",
+    "PointsReward": 20
+  },
+  {
+    "Text": "The author of a 'Hamlet' is:",
+    "AnswerId": 2,
+    "AnswerName": "William Shakespeare",
+    "PointsReward": 20
+  },
+  {
+    "Text": "The author of a 'Measure for Measure' is:",
+    "AnswerId": 2,
+    "AnswerName": "William Shakespeare",
+    "PointsReward": 20
+  },
+  {
+    "Text": "The author of a 'All's Well That Ends Well' is:",
+    "AnswerId": 2,
+    "AnswerName": "William Shakespeare",
+    "PointsReward": 20
+  },
+  {
+    "Text": "The author of a 'War and Peace' is:",
+    "AnswerId": 3,
+    "AnswerName": "Leo Tolstoy",
+    "PointsReward": 5
+  },
+  {
+    "Text": "The author of a 'Anna Karenina' is:",
+    "AnswerId": 3,
+    "AnswerName": "Leo Tolstoy",
+    "PointsReward": 5
+  },
+  {
+    "Text": "The author of a 'The Death of Ivan Ilyich' is:",
+    "AnswerId": 3,
+    "AnswerName": "Leo Tolstoy",
+    "PointsReward": 10
+  },
+  {
+    "Text": "The author of a 'Resurrection' is:",
+    "AnswerId": 3,
+    "AnswerName": "Leo Tolstoy",
+    "PointsReward": 20
+  }
+]
+ 
