@@ -21,4 +21,10 @@
     <ProjectReference Include="..\quiz-server.data\quiz-server.data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Resources\Authors.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
