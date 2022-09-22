@@ -78,6 +78,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IAccountsService, AccountsService>();
+builder.Services.AddTransient<IQuestionsService, QuestionsService>();
 
 var app = builder.Build();
 
