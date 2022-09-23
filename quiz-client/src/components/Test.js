@@ -6,7 +6,7 @@ function Test() {
     let token = localStorage.getItem('token');
 
     const fetchData = () => {
-        fetch('https://localhost:7132/api/Accounts',
+        fetch('https://localhost:7132/api/Questions',
             {
                 headers: {
                     'Accept': 'application/json',
@@ -19,7 +19,7 @@ function Test() {
             .then(res => setData(res))
             .catch(res => console.log(res));
     };
-
+        console.log(data)
     useEffect(() => {
         fetchData();
     },
@@ -27,8 +27,8 @@ function Test() {
 
     return (<div>
         <h2>Authorize</h2>
-        <p>{data.status}</p>
-        <p>{data.response}</p>
+        <p>{data.text}</p>
+        {data.options.map(x=><p>{x.name} = {x.id}</p>)}
     </div>)
 }
 

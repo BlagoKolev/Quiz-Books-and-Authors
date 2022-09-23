@@ -11,6 +11,7 @@ function Home() {
             <h3>or Create an account if you do not have one.</h3>
             <Link to={'register'}><Button>Register</Button></Link>
             <Link to={'test'}><Button>Test</Button></Link>
+            <Link to={'question'}><Button>Get Question</Button></Link>
         </div>
     )
 }
