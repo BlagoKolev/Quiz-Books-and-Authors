@@ -1,7 +1,7 @@
 import Center from './Center';
 import { useCallback, useEffect, useState } from 'react';
 import { BaseUrl, api, questionEndPoint } from '../Constants/Constants';
-import { Box, Card, CardContent, Typography, List, ListItem, ListItemText, Divider } from '@mui/material';
+import { Box, Card, CardContent, Typography, List, ListItem, ListItemText, Divider, Button } from '@mui/material';
 
 function Question() {
 
@@ -20,7 +20,7 @@ function Question() {
             .then(res => res.json())
             .catch(console.error);
 
-            setQuestion(data);
+        setQuestion(data);
     }, []);
 
     useEffect(() => {
@@ -57,6 +57,7 @@ function Question() {
                     </Box>
                 </CardContent>
             </Card>
+            <Button sx={{m:2}} variant="outlined" onClick={fetchData} >Skip Question</Button>
         </Center>
     )
 }
