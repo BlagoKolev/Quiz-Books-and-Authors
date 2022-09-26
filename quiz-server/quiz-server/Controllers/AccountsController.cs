@@ -97,6 +97,7 @@ namespace quiz_server.Controllers
                 if (isPasswordMatch)
                 {
                     var newJwtToken = CreateJWT(user);
+
                     return Ok(new LoginResponse()
                     {
                         Success = true,

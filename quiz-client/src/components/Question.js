@@ -6,10 +6,10 @@ import { Box, Card, CardContent, Typography, List, ListItem, ListItemText, Divid
 function Question() {
 
     let [question, setQuestion] = useState({});
-    
+
     let token = localStorage.getItem('token');
 
-    const sendAnswer = (value) => () => {
+    const checkAnswer = (value) => () => {
         // fetch(BaseUrl + api,
         //     {
         //         headers: {
@@ -23,15 +23,14 @@ function Question() {
         //     .then(res => res.json())
         //     .then(res => console.log(res))
         //     .catch(console.error);
-        
+
 
         if (value == question.answerId) {
-            alert("Rigth Answer")
-        }else {
+            alert("Correct Answer")
+        } else {
             alert("Wrong Answer")
         }
         getQuestion();
-        console.log(value)
     }
 
     const getQuestion = useCallback(async () => {
@@ -47,7 +46,7 @@ function Question() {
             .catch(console.error);
 
         setQuestion(data);
-       
+
     }, []);
 
     useEffect(() => {
@@ -56,7 +55,7 @@ function Question() {
     }, [getQuestion]);
 
     console.log(question)
-   
+
     return (
         <Center>
             <Card sx={{ width: 500 }}>
@@ -66,21 +65,13 @@ function Question() {
                         <List component="nav" aria-label="mailbox folders">
                             {question.options ? question.options.map(x =>
                                 <div key={x.id}>
-                                    <ListItem button onClick={sendAnswer(x.id)}>
+                                    <ListItem button onClick={checkAnswer(x.id)}>
                                         <ListItemText primary={x.name} />
                                     </ListItem>
                                     <Divider />
                                 </div>
                             )
                                 : ''}
-                            {/* {question.options.map(x =>
-                                <div key={x.id}>
-                                    <ListItem button >
-                                        <ListItemText primary={x.name} />
-                                    </ListItem>
-                                    <Divider />
-                                </div>)
-                            } */}
                         </List>
                     </Box>
                 </CardContent>
