@@ -37,7 +37,7 @@ namespace quiz_server.Controllers
             var email = User.Claims.Where(x => x.Type == ClaimTypes.Email).FirstOrDefault()?.Value;
             var userId = User.Claims.Where(x => x.Type == "id").FirstOrDefault()?.Value;
             var userEmail =this.User.FindFirstValue(ClaimTypes.Email);
-            return Ok("Access granted");
+            return Ok();
         }
     }
 }
