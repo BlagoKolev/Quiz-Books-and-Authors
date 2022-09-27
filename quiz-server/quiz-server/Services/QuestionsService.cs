@@ -49,7 +49,7 @@ namespace quiz_server.Services
                 }
 
                 var shuffledListWithOptions = ShuffleOptions(listWithOptions);
-                
+
                 foreach (var option in shuffledListWithOptions)
                 {
                     newQuestion.Options.Add(
@@ -62,6 +62,22 @@ namespace quiz_server.Services
 
             return newQuestion;
         }
+
+        public async Task<int> UpdateUserScore(string userId, int pointsReward)
+        {
+            var user = db.Users
+                .Where(x => x.Id == userId)
+                .FirstOrDefault();
+
+            if (user != null)
+            {
+                user.Score += pointsReward;
+                await db.SaveChangesAsync();
+                return user.Score;
+            }
+            return 0;
+        }
+
         private static List<int> ShuffleOptions(List<int> randomList)
         {
             var random = new Random();
@@ -71,5 +87,7 @@ namespace quiz_server.Services
             randomList[randomIndex] = temp;
             return randomList;
         }
+
+
     }
 }

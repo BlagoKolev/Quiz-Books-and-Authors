@@ -1,7 +1,7 @@
 import Center from './Center';
 import { useCallback, useEffect, useState } from 'react';
-import { BaseUrl, api, questionEndPoint } from '../Constants/Constants';
-import { Box, Card, CardContent, Typography, List, ListItem, ListItemText, Divider, Button } from '@mui/material';
+import { BaseUrl, api, questionEndPoint, setScore } from '../Constants/Constants';
+import { Box, Card, CardContent, Typography, List, ListItem, ListItemText, Divider, Button, Alert } from '@mui/material';
 
 function Question() {
 
@@ -9,24 +9,30 @@ function Question() {
 
     let token = localStorage.getItem('token');
 
+    const addPointsToUserScore = () => {
+
+        const sendData = {};
+        sendData.pointsReward = question.pointsReward;
+
+        fetch(BaseUrl + api + questionEndPoint + setScore,
+            {
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                method: "POST",
+                body: JSON.stringify(sendData)
+            })
+            .then(res => res.json())
+            .then(res => alert(`Your score is ${res}`))
+            .catch(console.error);
+    }
+
     const checkAnswer = (value) => () => {
-        // fetch(BaseUrl + api,
-        //     {
-        //         headers: {
-        //             'Accept': 'application/json',
-        //             'Content-Type': 'application/json',
-        //             'token': `Bearer ${token}`
-        //         },
-        //         method: "POST",
-        //         body: JSON.stringify(value)
-        //     })
-        //     .then(res => res.json())
-        //     .then(res => console.log(res))
-        //     .catch(console.error);
-
-
         if (value == question.answerId) {
             alert("Correct Answer")
+            addPointsToUserScore();
         } else {
             alert("Wrong Answer")
         }
@@ -39,7 +45,7 @@ function Question() {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'token': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
                 }
             })
             .then(res => res.json())

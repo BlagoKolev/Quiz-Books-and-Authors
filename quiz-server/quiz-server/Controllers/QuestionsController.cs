@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using quiz_server.ModelsDto;
 using quiz_server.Services;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace quiz_server.Controllers
 {
@@ -16,8 +18,9 @@ namespace quiz_server.Controllers
         {
             this.questionsService = questionsService;
         }
-       
+
         [HttpGet]
+        [Authorize]
         public IActionResult Get()
         {
             var question = questionsService.GetNextQuestion();
@@ -31,13 +34,13 @@ namespace quiz_server.Controllers
         [HttpPost]
         [Route("setScore")]
         [Authorize]
-        public IActionResult SetScore()
+        public async Task<IActionResult> SetScore([FromBody] SetUserScoreDto request)
         {
-            var user = this.User;
-            var email = User.Claims.Where(x => x.Type == ClaimTypes.Email).FirstOrDefault()?.Value;
+            //var userEmail = this.User.FindFirstValue(ClaimTypes.Email);
+            //var email = User.Claims.Where(x => x.Type == ClaimTypes.Email).FirstOrDefault()?.Value;
             var userId = User.Claims.Where(x => x.Type == "id").FirstOrDefault()?.Value;
-            var userEmail =this.User.FindFirstValue(ClaimTypes.Email);
-            return Ok();
+            var userTotalScore = await questionsService.UpdateUserScore(userId, request.PointsReward);
+            return Ok(JsonSerializer.Serialize(userTotalScore));
         }
     }
 }

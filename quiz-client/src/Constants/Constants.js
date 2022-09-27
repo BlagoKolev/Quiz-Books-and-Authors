@@ -4,3 +4,4 @@ export const registerEndPoint = 'register/';
 export const loginEndPoint = 'login/';
 export const api = 'api/';
 export const questionEndPoint = 'Questions/';
+export const setScore = 'setScore/';
