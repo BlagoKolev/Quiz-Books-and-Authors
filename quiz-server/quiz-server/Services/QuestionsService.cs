@@ -41,7 +41,7 @@ namespace quiz_server.Services
 
                 while (listWithOptions.Count < 4)
                 {
-                    var nextOptionId = randomId.Next(maxAuthorsNumber);
+                    var nextOptionId = randomId.Next(1, maxAuthorsNumber);
                     if (!listWithOptions.Contains(nextOptionId))
                     {
                         listWithOptions.Add(nextOptionId);
@@ -49,7 +49,7 @@ namespace quiz_server.Services
                 }
 
                 var shuffledListWithOptions = ShuffleOptions(listWithOptions);
-
+                // ID = 46 warning
                 foreach (var option in shuffledListWithOptions)
                 {
                     newQuestion.Options.Add(

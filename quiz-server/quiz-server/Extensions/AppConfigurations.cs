@@ -18,7 +18,7 @@ namespace quiz_server.Extensions
 
             return app;
         }
-        private static async void SeedQuestions(IServiceProvider services)
+        private static void SeedQuestions(IServiceProvider services)
         {
             var db = GetDbContext(services);
             if (db.Questions.Any())
@@ -27,12 +27,12 @@ namespace quiz_server.Extensions
             }
 
             using FileStream openStream = File.OpenRead("Resources/Questions.json");
-            var questions = await JsonSerializer.DeserializeAsync<Question[]>(openStream);
+            var questions = JsonSerializer.DeserializeAsync<Question[]>(openStream).GetAwaiter().GetResult();
 
-            await db.Questions.AddRangeAsync(questions);
-            await db.SaveChangesAsync();
+            db.Questions.AddRangeAsync(questions).GetAwaiter().GetResult();
+            db.SaveChangesAsync().GetAwaiter().GetResult();
         }
-        private static async void SeedAuthors(IServiceProvider services)
+        private static void SeedAuthors(IServiceProvider services)
         {
             var db = GetDbContext(services);
 
@@ -42,10 +42,10 @@ namespace quiz_server.Extensions
             }
             //string directory = Directory.GetCurrentDirectory();
             using FileStream openStream = File.OpenRead("Resources/Authors.json");
-            var authors = await JsonSerializer.DeserializeAsync<Author[]>(openStream);
+            var authors = JsonSerializer.DeserializeAsync<Author[]>(openStream).GetAwaiter().GetResult();
 
-            await db.Authors.AddRangeAsync(authors);
-            await db.SaveChangesAsync();
+            db.Authors.AddRangeAsync(authors).GetAwaiter().GetResult();
+            db.SaveChangesAsync().GetAwaiter().GetResult();
         }
         private static QuizDbContext GetDbContext(IServiceProvider services)
         {

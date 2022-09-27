@@ -20,7 +20,7 @@ namespace quiz_server.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public IActionResult Get()
         {
             var question = questionsService.GetNextQuestion();
