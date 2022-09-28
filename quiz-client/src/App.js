@@ -6,11 +6,12 @@ import Register from './components/Register';
 import Home from './components/Home';
 import Test from './components/Test';
 import Question from './components/Question';
+import Header from './components/Header';
 
 function App() {
   return (
     <div className="App">
-
+      <Header />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='login' element={<Login />} />

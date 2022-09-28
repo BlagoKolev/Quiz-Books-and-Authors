@@ -40,7 +40,7 @@ function Question() {
         if (value == question.answerId) {
             addPointsToUserScore();
         } else {
-            setNotificationMsg('Wrong anser.');
+            setNotificationMsg('Wrong answer.');
             setNotification(true);
         }
         getQuestion();
