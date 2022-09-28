@@ -1,5 +1,6 @@
 import Center from './Center';
 import { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BaseUrl, api, questionEndPoint, setScore } from '../Constants/Constants';
 import { Box, Card, CardContent, Typography, List, ListItem, ListItemText, Divider, Button, Snackbar, Alert } from '@mui/material';
 
@@ -10,7 +11,7 @@ function Question() {
     let [notificationMsg, setNotificationMsg] = useState('');
 
     let token = localStorage.getItem('token');
-
+    let navigate = useNavigate();
     const addPointsToUserScore = () => {
 
         const sendData = {};
@@ -55,7 +56,9 @@ function Question() {
                 }
             })
             .then(res => res.json())
-            .catch(console.error);
+            .catch((error) => {
+                navigate('/login');
+            });
 
         setQuestion(data);
 
