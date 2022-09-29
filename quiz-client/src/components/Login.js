@@ -1,12 +1,14 @@
 import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Center from './Center';
 import { BaseUrl, Accounts, loginEndPoint, api } from '../Constants/Constants';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
 function Login() {
 
-    let [errors, setErrors] = useState({});
+    const { setUser, setScore} = useContext(UserContext);
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
     function onLogin(e) {
@@ -15,6 +17,7 @@ function Login() {
         let errors = Validate(formData);
         loginUser(formData);
         navigate("/")
+        
     }
 
     function loginUser(formData) {
@@ -36,9 +39,10 @@ function Login() {
             .then(res => {
                 const token = res.token;
                 localStorage.setItem('token', token);
+                setUser(res.username);
+                setScore(res.score);
             })
-            .then(res => console.log(res.token))
-            .catch(res => console.log(res.token))
+            .catch(console.error)
     }
 
     function Validate(formData) {

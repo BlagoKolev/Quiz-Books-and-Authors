@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../UserContext';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,8 +14,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 
 function Header() {
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [auth, setAuth] = useState(true);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const {user, score} = useContext(UserContext);
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -53,9 +55,10 @@ function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Book Quiz
-          </Typography>
+          { user && <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          {user}
+          </Typography>}
+          {score && <div>Total score: {score}</div>}
           {auth && (
             <div>
               <IconButton

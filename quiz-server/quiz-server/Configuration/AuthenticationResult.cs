@@ -8,6 +8,8 @@
         }
         public string? Token { get; set; }
         public bool Success { get; set; }
+        public string Username { get; set; }
+        public int Score { get; set; }
         public ICollection<string> Errors { get; set; }
     }
 }

@@ -1,23 +1,25 @@
 import Center from './Center';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BaseUrl, api, questionEndPoint, setScore } from '../Constants/Constants';
+import { BaseUrl, api, questionEndPoint, setScoreEndPoint } from '../Constants/Constants';
 import { Box, Card, CardContent, Typography, List, ListItem, ListItemText, Divider, Button, Snackbar, Alert } from '@mui/material';
+import { UserContext } from '../UserContext';
 
 function Question() {
 
-    let [question, setQuestion] = useState({});
-    let [notification, setNotification] = useState(false);
-    let [notificationMsg, setNotificationMsg] = useState('');
+    const [question, setQuestion] = useState({});
+    const [notification, setNotification] = useState(false);
+    const [notificationMsg, setNotificationMsg] = useState('');
+    const { setUser, setScore } = useContext(UserContext);
 
-    let token = localStorage.getItem('token');
-    let navigate = useNavigate();
+    const token = localStorage.getItem('token');
+    const navigate = useNavigate();
+
     const addPointsToUserScore = () => {
-
         const sendData = {};
         sendData.pointsReward = question.pointsReward;
 
-        fetch(BaseUrl + api + questionEndPoint + setScore,
+        fetch(BaseUrl + api + questionEndPoint + setScoreEndPoint,
             {
                 headers: {
                     'Accept': 'application/json',
@@ -29,8 +31,9 @@ function Question() {
             })
             .then(res => res.json())
             .then(res => {
-                setNotification(true)
+                setNotification(true);
                 setNotificationMsg(`Correct answer. You just won ${question.pointsReward} points. Total score: ${res}`);
+                setScore(res)    
             })
             .catch(console.error);
     }

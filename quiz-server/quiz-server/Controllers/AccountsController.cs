@@ -83,7 +83,7 @@ namespace quiz_server.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                return BadRequest(new RegistrationResponse()
+                return BadRequest(new LoginResponse()
                 {
                     Errors = new List<string> { "Invalid payload." }
                 });
@@ -101,7 +101,9 @@ namespace quiz_server.Controllers
                     return Ok(new LoginResponse()
                     {
                         Success = true,
-                        Token = newJwtToken
+                        Token = newJwtToken,
+                        Username = user.UserName,
+                        Score = user.Score,
                     });
                 }
             }

@@ -1,13 +1,15 @@
 import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Center from './Center';
 import { BaseUrl, Accounts, registerEndPoint, api } from '../Constants/Constants';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../UserContext';
 
 function Register() {
 
-    let [errors, setErrors] = useState({});
-    let navigate = useNavigate();
+    const { user, score} = useContext(UserContext)
+    const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
     function onRegister(e) {
         e.preventDefault();
