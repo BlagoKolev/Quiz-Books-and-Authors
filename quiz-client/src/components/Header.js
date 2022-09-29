@@ -16,7 +16,7 @@ import Menu from '@mui/material/Menu';
 function Header() {
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
-  const {user, score} = useContext(UserContext);
+  const { score } = useContext(UserContext);
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -55,8 +55,9 @@ function Header() {
           >
             <MenuIcon />
           </IconButton>
-          { user && <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          {user}
+          {localStorage.getItem('username') ? <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            {localStorage.getItem('username')}
+          </Typography> : <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           </Typography>}
           {score && <div>Total score: {score}</div>}
           {auth && (

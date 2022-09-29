@@ -66,7 +66,9 @@ namespace quiz_server.Controllers
                 return Ok(new RegistrationResponse()
                 {
                     Success = true,
-                    Token = newJwtToken
+                    Token = newJwtToken,
+                    Username = user.UserName,
+                    Score = user.Score,
                 });
             }
             return BadRequest(new RegistrationResponse()

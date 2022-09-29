@@ -7,7 +7,7 @@ import { UserContext } from '../UserContext';
 
 function Register() {
 
-    const { user, score} = useContext(UserContext)
+    const { setUser, setScore} = useContext(UserContext);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
@@ -41,6 +41,8 @@ function Register() {
             .then(res => {
                 const token = res.token;
                 localStorage.setItem('token', token);
+                setUser(res.username);
+                setScore(res.score);
             })
             .catch(function (res) { console.log(res) })
     }
