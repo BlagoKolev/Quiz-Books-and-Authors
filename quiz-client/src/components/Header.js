@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../UserContext';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,11 +13,21 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import { Button } from '@mui/material';
 
 function Header() {
   const [auth, setAuth] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
-  const { score } = useContext(UserContext);
+  const { user, setUser, score, setScore } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  const logout = (e) => {
+    localStorage.clear();
+    setUser(null);
+    setScore(null);
+    navigate('/');
+  }
 
   const handleChange = (event) => {
     setAuth(event.target.checked);
@@ -32,7 +43,7 @@ function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <FormGroup>
+      {/* <FormGroup>
         <FormControlLabel
           control={
             <Switch
@@ -43,10 +54,11 @@ function Header() {
           }
           label={auth ? 'Logout' : 'Login'}
         />
-      </FormGroup>
+      </FormGroup> */}
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          <h3>Books Quiz</h3>
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -54,14 +66,15 @@ function Header() {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
-          {localStorage.getItem('username') ? <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {localStorage.getItem('username')}
+          </IconButton> */}
+          {user ? <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            {user}
           </Typography> : <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           </Typography>}
           {score && <div>Total score: {score}</div>}
-          {auth && (
+          {user && (
             <div>
+
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -72,6 +85,7 @@ function Header() {
               >
                 <AccountCircle />
               </IconButton>
+
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -88,10 +102,14 @@ function Header() {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={logout}>Logout</MenuItem>
               </Menu>
             </div>
           )}
+          {!user &&
+            <Link to={'/login'}><Button variant="outlined">Login</Button>
+            </Link>
+          }
         </Toolbar>
       </AppBar>
     </Box>

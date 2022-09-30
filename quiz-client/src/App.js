@@ -4,7 +4,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
-import Test from './components/Test';
+import Logout from './components/Logout';
 import Question from './components/Question';
 import Header from './components/Header';
 import { UserContext } from './UserContext';
@@ -15,14 +15,14 @@ function App() {
 
   return (
     <div className="App">
-      <UserContext.Provider value={{user, setUser, score, setScore}} >
+      <UserContext.Provider value={{ user, setUser, score, setScore }} >
         <Header />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
-          {/* <Route path='test' element={<Test />} /> */}
           <Route path='question' element={<Question />} />
+          <Route path='logout' element={<Logout/>} />
         </Routes>
       </UserContext.Provider>
     </div>
