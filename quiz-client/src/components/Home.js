@@ -1,17 +1,32 @@
 import { Button } from '@mui/material';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom'
+import { UserContext } from '../UserContext';
 
 function Home() {
-    
+
+    const { user } = useContext(UserContext);
+
     return (
         <div>
             <h1>Welcome to Books Quiz Challenge</h1>
-            <h3>Please login to proceed to quiz</h3>
-            <Link to={'login'}><Button>Login</Button></Link>
-            <h3>or Create an account if you do not have one.</h3>
-            <Link to={'register'}><Button>Register</Button></Link>
-            <Link to={'test'}><Button>Test</Button></Link>
-            <Link to={'question'}><Button>Get Question</Button></Link>
+            {!user && (
+                <>
+                    <h3>Please
+                        <Link to={'login'} style={{ textDecoration: 'none' }}>
+                            <Button>Login</Button>
+                        </Link>
+                        to proceed to quiz</h3>
+
+                    <h3>or
+                        <Link to={'register'} style={{ textDecoration: 'none' }}>
+                            <Button> Create an account </Button>
+                        </Link>
+                        if you do not have one.</h3>
+
+                </>
+            )}
+            {user && <Link to={'question'} style={{ textDecoration: 'none' }}><Button><h2>Start Quiz</h2></Button></Link>}
         </div>
     )
 }

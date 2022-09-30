@@ -23,6 +23,7 @@ function Header() {
   const navigate = useNavigate();
 
   const logout = (e) => {
+    e.preventDefault();
     localStorage.clear();
     setUser(null);
     setScore(null);
@@ -72,9 +73,9 @@ function Header() {
           </Typography> : <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           </Typography>}
           {score && <div>Total score: {score}</div>}
-          {user && (
-            <div>
 
+          <div>
+            {user &&
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -85,31 +86,31 @@ function Header() {
               >
                 <AccountCircle />
               </IconButton>
+            }
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={logout}>Logout</MenuItem>
+            </Menu>
+            {!user &&
+              <Link to={'/login'}><Button variant="outlined">Login</Button>
+              </Link>
+            }
+          </div>
 
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={logout}>Logout</MenuItem>
-              </Menu>
-            </div>
-          )}
-          {!user &&
-            <Link to={'/login'}><Button variant="outlined">Login</Button>
-            </Link>
-          }
         </Toolbar>
       </AppBar>
     </Box>

@@ -32,7 +32,7 @@ function Question() {
             .then(res => res.json())
             .then(res => {
                 setNotification(true);
-                setNotificationMsg(`Correct answer. You just won ${question.pointsReward} points. Total score: ${res}`);
+                setNotificationMsg(`Correct answer. You just won ${question.pointsReward} points. Total score: ${res.score}`);
                 setScore(res.score);
                 setUser(res.username);    
             })
