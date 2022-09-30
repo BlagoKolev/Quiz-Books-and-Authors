@@ -6,15 +6,15 @@ import Register from './components/Register';
 import Home from './components/Home';
 import Question from './components/Question';
 import Header from './components/Header';
-import { UserContext } from './UserContext';
+import { UserContext, UserContextProvider } from './UserContext';
 
 function App() {
-  let [user, setUser] = useState();
-  let [score, setScore] = useState();
+  // let [user, setUser] = useState();
+  // let [score, setScore] = useState();
 
   return (
     <div className="App">
-      <UserContext.Provider value={{ user, setUser, score, setScore }} >
+      <UserContextProvider  >
         <Header />
         <Routes>
           <Route path='/' element={<Home />} />
@@ -22,7 +22,7 @@ function App() {
           <Route path='register' element={<Register />} />
           <Route path='question' element={<Question />} />
         </Routes>
-      </UserContext.Provider>
+      </UserContextProvider>
     </div>
   );
 }
