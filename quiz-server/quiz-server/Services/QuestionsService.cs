@@ -63,7 +63,7 @@ namespace quiz_server.Services
             return newQuestion;
         }
 
-        public async Task<int> UpdateUserScore(string userId, int pointsReward)
+        public async Task<SetUserScoreResponse> UpdateUserScore(string userId, int pointsReward)
         {
             var user = db.Users
                 .Where(x => x.Id == userId)
@@ -73,9 +73,15 @@ namespace quiz_server.Services
             {
                 user.Score += pointsReward;
                 await db.SaveChangesAsync();
-                return user.Score;
+
+                return new SetUserScoreResponse
+                {
+                    UserId = user.Id,
+                    Username = user.UserName,
+                    Score = user.Score,
+                };
             }
-            return 0;
+            return null;
         }
 
         private static List<int> ShuffleOptions(List<int> randomList)

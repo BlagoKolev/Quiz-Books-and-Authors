@@ -33,7 +33,8 @@ function Question() {
             .then(res => {
                 setNotification(true);
                 setNotificationMsg(`Correct answer. You just won ${question.pointsReward} points. Total score: ${res}`);
-                setScore(res)    
+                setScore(res.score);
+                setUser(res.username);    
             })
             .catch(console.error);
     }

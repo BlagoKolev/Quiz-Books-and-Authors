@@ -39,8 +39,13 @@ namespace quiz_server.Controllers
             //var userEmail = this.User.FindFirstValue(ClaimTypes.Email);
             //var email = User.Claims.Where(x => x.Type == ClaimTypes.Email).FirstOrDefault()?.Value;
             var userId = User.Claims.Where(x => x.Type == "id").FirstOrDefault()?.Value;
-            var userTotalScore = await questionsService.UpdateUserScore(userId, request.PointsReward);
-            return Ok(JsonSerializer.Serialize(userTotalScore));
+            var response = await questionsService.UpdateUserScore(userId, request.PointsReward);
+            if (response != null)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest("User not found");
         }
     }
 }
