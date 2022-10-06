@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using quiz_server.data.Data;
 using quiz_server.data.Data.Models;
 using System.Text.Json;
@@ -15,8 +16,34 @@ namespace quiz_server.Extensions
             MigrateDatabase(services);
             SeedAuthors(services);
             SeedQuestions(services);
-
+            await CreateAdministrator(services);
             return app;
+        }
+
+        private static async Task<IdentityResult> CreateAdministrator(IServiceProvider services)
+        {
+            var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+            var result = new IdentityResult();
+
+            if (await roleManager.RoleExistsAsync("Administrator"))
+            {
+                return result;
+            }
+
+            var adminRole = new IdentityRole("Administrator");
+            await roleManager.CreateAsync(adminRole);
+
+            var admin = new ApplicationUser
+            {
+                Email = "admin@quiz.com",
+                UserName = "admin@quiz.com",
+            };
+
+            await userManager.CreateAsync(admin, "admin");
+            result = await userManager.AddToRoleAsync(admin, adminRole.Name);
+        
+            return result;
         }
         private static void SeedQuestions(IServiceProvider services)
         {
