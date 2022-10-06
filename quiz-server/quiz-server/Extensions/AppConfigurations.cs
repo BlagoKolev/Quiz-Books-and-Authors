@@ -38,6 +38,7 @@ namespace quiz_server.Extensions
             {
                 Email = "admin@quiz.com",
                 UserName = "admin@quiz.com",
+                Role = "Administrator",
             };
 
             await userManager.CreateAsync(admin, "123456");

@@ -151,7 +151,7 @@ namespace quiz_server.Controllers
                 new Claim("id", user.Id),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.NameIdentifier,  user.UserName),
-                //new Claim(ClaimTypes.Role, user.Role)
+                new Claim(ClaimTypes.Role, user.Role)
             };
 
             var token = new JwtSecurityToken(
