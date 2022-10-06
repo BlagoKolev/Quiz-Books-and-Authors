@@ -1,7 +1,10 @@
-﻿namespace quiz_server.Configuration
+﻿
+namespace quiz_server.Configuration
 {
     public class JwtConfig
     {
         public string Key { get; set; }
+        public string Issuer { get; set; }
+        public string Audience { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace quiz_server.Extensions
                 UserName = "admin@quiz.com",
             };
 
-            await userManager.CreateAsync(admin, "admin");
+            await userManager.CreateAsync(admin, "123456");
             result = await userManager.AddToRoleAsync(admin, adminRole.Name);
         
             return result;

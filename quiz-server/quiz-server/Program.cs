@@ -35,10 +35,12 @@ builder.Services.AddAuthentication(options =>
        {
            ValidateIssuerSigningKey = true,
            IssuerSigningKey = new SymmetricSecurityKey(key),
-           ValidateIssuer = false, //ToDo => must be updated
-           ValidateAudience = false,
+           ValidateIssuer = true,
+           ValidateAudience = true,
            ValidateLifetime = true,
            RequireExpirationTime = false,
+           ValidIssuer = builder.Configuration["JwtConfig:Issuer"],
+           ValidAudience = builder.Configuration["JwtConfig:Audience"]
        };
    });
 
@@ -72,6 +74,7 @@ builder.Services.AddCors(options =>
             });
 });
 
+builder.Services.AddMvc();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
