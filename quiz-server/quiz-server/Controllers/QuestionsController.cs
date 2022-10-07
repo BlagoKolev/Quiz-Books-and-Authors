@@ -48,13 +48,6 @@ namespace quiz_server.Controllers
             return BadRequest("User not found");
         }
 
-        [HttpGet]
-        [Route("admin")]
-        [Authorize(Roles = "Administrator")]
-        public IActionResult Admin()
-        {
-            var a = 5;
-            return Ok(a);
-        }
+        
     }
 }

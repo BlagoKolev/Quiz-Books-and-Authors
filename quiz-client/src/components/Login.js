@@ -15,10 +15,9 @@ function Login() {
         e.preventDefault();
         let formData = new FormData(e.currentTarget);
         let validateErrors = Validate(formData);
-        if (!validateErrors) {
-            loginUser(formData);
-            navigate("/")
-        }
+        loginUser(formData);
+        navigate("/")
+
     }
 
     function loginUser(formData) {

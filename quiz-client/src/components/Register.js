@@ -44,7 +44,7 @@ function Register() {
                 setUser(res);
                 setScore(res.score);
             })
-            .catch(function (res) { console.log(res) })
+            .catch(console.error)
     }
 
     function Validate(formData) {

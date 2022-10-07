@@ -1,12 +1,12 @@
 import { Box, TextField, Button, CardContent, Typography, Card } from "@mui/material";
-import { BaseUrl, Accounts, loginEndPoint, api } from '../Constants/Constants';
+import { BaseUrl, api, adminControllerEndPoint, addQuestionEndPoint } from '../Constants/Constants';
 import Center from './Center';
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 function AddNewQuestion() {
 
     const [errors, setErrors] = useState({});
-  
+
     const Validate = (data) => {
         let bookTitle = data.get('bookTitle');
         let authorName = data.get('authorName');
@@ -32,18 +32,19 @@ function AddNewQuestion() {
         sendData.authorName = data.get("authorName");
         const token = localStorage.getItem("token");
 
-        fetch(BaseUrl + api + Accounts + loginEndPoint,
+        fetch(BaseUrl + api + adminControllerEndPoint + addQuestionEndPoint,
             {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Authentication' : `${token}`
+                    'Authorization': `Bearer ${token}`
                 },
                 method: "POST",
                 body: JSON.stringify(sendData)
             })
             .then(res => res.json())
             .then(res => console.log(res))
+            .catch(console.error)
     }
 
     const AddQuestion = (e) => {
@@ -51,6 +52,7 @@ function AddNewQuestion() {
         let data = new FormData(e.currentTarget);
         Validate(data);
         CreateQuestionInDb(data);
+
     }
 
     return (

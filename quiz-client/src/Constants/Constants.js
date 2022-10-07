@@ -5,3 +5,5 @@ export const loginEndPoint = 'login/';
 export const api = 'api/';
 export const questionEndPoint = 'Questions/';
 export const setScoreEndPoint = 'setScore/';
+export const addQuestionEndPoint = "addQuestion/";
+export const adminControllerEndPoint = 'Admins/';
