@@ -7,7 +7,7 @@ import { UserContext } from '../UserContext';
 
 function Login() {
 
-    const { setUser, setScore} = useContext(UserContext);
+    const { setUser, setScore } = useContext(UserContext);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ function Login() {
         let errors = Validate(formData);
         loginUser(formData);
         navigate("/")
-        
+
     }
 
     function loginUser(formData) {
@@ -39,7 +39,6 @@ function Login() {
             .then(res => {
                 const token = res.token;
                 localStorage.setItem('token', token);
-                //localStorage.setItem('username', res.username);
                 setUser(res.username);
                 setScore(res.score);
             })

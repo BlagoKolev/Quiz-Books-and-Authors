@@ -107,6 +107,7 @@ namespace quiz_server.Controllers
                         Success = true,
                         Token = newJwtToken,
                         Username = user.UserName,
+                        Role = user.Role,
                         Score = user.Score,
                     });
                 }
