@@ -41,7 +41,7 @@ function Register() {
             .then(res => {
                 const token = res.token;
                 localStorage.setItem('token', token);
-                setUser(res.username);
+                setUser(res);
                 setScore(res.score);
             })
             .catch(function (res) { console.log(res) })

@@ -69,7 +69,7 @@ function Header() {
             <MenuIcon />
           </IconButton> */}
           {user ? <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {user}
+            {user.username}
           </Typography> : <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           </Typography>}
           {score && <div>Total score: {score}</div>}

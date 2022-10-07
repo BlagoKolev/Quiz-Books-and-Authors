@@ -39,7 +39,8 @@ function Login() {
             .then(res => {
                 const token = res.token;
                 localStorage.setItem('token', token);
-                setUser(res.username);
+                //setUser(res.username);
+                setUser(res);
                 setScore(res.score);
             })
             .catch(console.error)
