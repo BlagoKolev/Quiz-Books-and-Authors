@@ -21,6 +21,7 @@ function Header() {
   const { user, setUser, score, setScore } = useContext(UserContext);
 
   const navigate = useNavigate();
+  let newQuestionButton;
 
   const logout = (e) => {
     e.preventDefault();
@@ -41,6 +42,15 @@ function Header() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+
+  if (user && user.role === 'Administrator') {
+    newQuestionButton = <Link to={'/login'}>
+      <Button variant="outlined">Add Question</Button>
+    </Link>;
+  } else {
+    newQuestionButton = <div />;
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -68,10 +78,14 @@ function Header() {
           >
             <MenuIcon />
           </IconButton> */}
-          {user ? <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {user.username}
-          </Typography> : <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          </Typography>}
+          {newQuestionButton}
+
+          {user
+            ? <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              {user.username}
+            </Typography>
+            : <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            </Typography>}
           {score && <div>Total score: {score}</div>}
 
           <div>
