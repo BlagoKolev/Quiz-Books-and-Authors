@@ -91,9 +91,9 @@ function Register() {
                         <form onSubmit={onRegister}>
                             <TextField name="email" id="outlined-basic" label="Email" variant="outlined" />
                             {errors.email ? <span style={{ color: 'red' }}>{errors.email}</span> : <span></span>}
-                            <TextField name="password" id="outlined-basic" label="Password" variant="outlined" />
+                            <TextField type="password" name="password" id="outlined-basic" label="Password" variant="outlined" />
                             {errors.password ? <span style={{ color: 'red' }}>{errors.password}</span> : <span></span>}
-                            <TextField name="confirmPassword" id="outlined-basic" label="Confirm Password" variant="outlined" />
+                            <TextField type="password" name="confirmPassword" id="outlined-basic" label="Confirm Password" variant="outlined" />
                             {errors.confirmPassword ? <span style={{ color: 'red' }}>{errors.confirmPassword}</span> : <span></span>}
                             <Button sx={{ width: '90%' }} type="submit" variant="contained" size="large">Register</Button>
                         </form>

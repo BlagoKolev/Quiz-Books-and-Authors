@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Question from './components/Question';
 import Header from './components/Header';
 import { UserContext, UserContextProvider } from './UserContext';
+import AddNewQuestion from './components/AddNewQuestion';
 
 function App() {
   // let [user, setUser] = useState();
@@ -21,6 +22,7 @@ function App() {
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
           <Route path='question' element={<Question />} />
+          <Route path="addQuestion" element={<AddNewQuestion />} />
         </Routes>
       </UserContextProvider>
     </div>

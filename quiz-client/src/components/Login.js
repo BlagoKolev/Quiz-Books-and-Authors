@@ -14,10 +14,11 @@ function Login() {
     function onLogin(e) {
         e.preventDefault();
         let formData = new FormData(e.currentTarget);
-        let errors = Validate(formData);
-        loginUser(formData);
-        navigate("/")
-
+        let validateErrors = Validate(formData);
+        if (!validateErrors) {
+            loginUser(formData);
+            navigate("/")
+        }
     }
 
     function loginUser(formData) {
@@ -82,7 +83,7 @@ function Login() {
                         <form onSubmit={onLogin}>
                             <TextField name="email" id="outlined-basic" label="Email" variant="outlined" />
                             {errors.email ? <span style={{ color: 'red' }}>{errors.email}</span> : <span></span>}
-                            <TextField name="password" id="outlined-basic" label="Password" variant="outlined" />
+                            <TextField type="password" name="password" id="outlined-basic" label="Password" variant="outlined" />
                             {errors.password ? <span style={{ color: 'red' }}>{errors.password}</span> : <span></span>}
                             <Button sx={{ width: '90%' }} type="submit" variant="contained" size="large">Start Qiuz</Button>
                         </form>
