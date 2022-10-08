@@ -46,7 +46,7 @@ function Header() {
 
   if (user && user.role === 'Administrator') {
     newQuestionButton = <Link to={'/addQuestion'}>
-      <Button variant="outlined">Add Question</Button>
+      <Button sx={{mx:3}} variant="outlined">Add Question</Button>
     </Link>;
   } else {
     newQuestionButton = <div />;
@@ -68,7 +68,7 @@ function Header() {
       </FormGroup> */}
       <AppBar position="static">
         <Toolbar>
-          <Link to={'/'} style={{textDecoration:"none", color:"white"}}>
+          <Link to={'/'} style={{ textDecoration: "none", color: "white" }}>
             <h3>Books Quiz</h3>
           </Link>
           {/* <IconButton
