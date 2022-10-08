@@ -31,7 +31,7 @@ namespace quiz_server.Controllers
                 });
             }
             var author = adminsService.CheckAuthorExist(questionData.AuthorName);
-            var result = await adminsService.AddQuestion(questionData.BookTitle, questionData.AuthorName, author);
+            var result = await adminsService.AddQuestion(questionData.BookTitle, questionData.AuthorName, questionData.PointsReward, author);
 
             if (result > 0)
             {

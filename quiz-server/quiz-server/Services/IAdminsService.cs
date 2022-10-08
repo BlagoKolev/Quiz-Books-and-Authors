@@ -6,6 +6,6 @@ namespace quiz_server.Services
     {
         bool CheckBookExist(string bookTitle);
         CheckAuthorExistDto CheckAuthorExist(string authorName);
-        Task<int> AddQuestion(string bookName,string authorName, CheckAuthorExistDto author);
+        Task<int> AddQuestion(string bookName,string authorName,byte pointsReward, CheckAuthorExistDto author);
     }
 }

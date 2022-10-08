@@ -13,7 +13,7 @@ namespace quiz_server.Services
             this.db = db;
         }
 
-        public async Task<int> AddQuestion(string bookTitle, string authorName, CheckAuthorExistDto author)
+        public async Task<int> AddQuestion(string bookTitle, string authorName,byte pointsReward, CheckAuthorExistDto author)
         {
             var result = 0;
             var question = $"The author of '{bookTitle}' is:";
@@ -33,7 +33,7 @@ namespace quiz_server.Services
                     Text = question,
                     AnswerId = newAuthor.Id,
                     AnswerName = newAuthor.Name,
-                    PointsReward = 10,
+                    PointsReward = pointsReward,
                 };
                 await this.db.Questions.AddAsync(newQuestion);
                 result = await this.db.SaveChangesAsync();
@@ -45,7 +45,7 @@ namespace quiz_server.Services
                     Text = question,
                     AnswerId = author.Id,
                     AnswerName = author.Name,
-                    PointsReward = 10,
+                    PointsReward = pointsReward,
                 };
                 await this.db.Questions.AddAsync(newQuestion);
                 result = await this.db.SaveChangesAsync();

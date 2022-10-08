@@ -4,5 +4,6 @@
     {
         public string BookTitle { get; set; }
         public string AuthorName { get; set; }
+        public byte PointsReward { get; set; }
     }
 }

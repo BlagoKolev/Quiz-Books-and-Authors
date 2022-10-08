@@ -29,7 +29,7 @@ function AddNewQuestion() {
             errorList.author = "Author name must be more than 3 symbols.";
             setErrors(errorList);
         }
-        if(pointsReward < 1 || pointsReward > 20){
+        if (pointsReward < 1 || pointsReward > 20) {
             errorList.pointsReward = "Points reward must be between 1 and 20.";
             setErrors(errorList);
         }
@@ -40,6 +40,8 @@ function AddNewQuestion() {
         let sendData = {};
         sendData.bookTitle = data.get("bookTitle");
         sendData.authorName = data.get("authorName");
+        sendData.pointsReward = data.get("pointsReward");
+
         const token = localStorage.getItem("token");
 
         fetch(BaseUrl + api + adminControllerEndPoint + addQuestionEndPoint,
@@ -64,10 +66,10 @@ function AddNewQuestion() {
     const AddQuestion = (e) => {
         e.preventDefault();
         let data = new FormData(e.currentTarget);
-       let errorsList = Validate(data);
-       if(Object.keys(errorsList).length == 0){
-           CreateQuestionInDb(data);
-       }
+        let errorsList = Validate(data);
+        if (Object.keys(errorsList).length == 0) {
+            CreateQuestionInDb(data);
+        }
     }
 
     const closeSnackbar = () => {
