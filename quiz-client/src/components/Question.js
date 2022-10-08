@@ -11,6 +11,7 @@ function Question() {
     const [notification, setNotification] = useState(false);
     const [notificationMsg, setNotificationMsg] = useState('');
     const { setUser, setScore } = useContext(UserContext);
+    const [alertSuccess, setAlertSuccess] = useState();
 
     const token = localStorage.getItem('token');
     const navigate = useNavigate();
@@ -31,10 +32,11 @@ function Question() {
             })
             .then(res => res.json())
             .then(res => {
+                setAlertSuccess(true);
                 setNotification(true);
                 setNotificationMsg(`Correct answer. You just won ${question.pointsReward} points. Total score: ${res.score}`);
                 setScore(res.score);
-                setUser(res);    
+                setUser(res);
             })
             .catch(console.error);
     }
@@ -46,6 +48,7 @@ function Question() {
         } else {
             setNotificationMsg('Wrong answer.');
             setNotification(true);
+            setAlertSuccess(false);
         }
         getQuestion();
     }
@@ -99,7 +102,7 @@ function Question() {
                             open={notification}
                             autoHideDuration={3000}
                             onClose={closeSnackbar}>
-                            <Alert severity='info'>{notificationMsg}</Alert>
+                            <Alert severity={alertSuccess ? "success" : "error"} variant="filled">{notificationMsg}</Alert>
                         </Snackbar>}
 
                     </Box>

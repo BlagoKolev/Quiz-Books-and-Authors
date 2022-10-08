@@ -1,4 +1,4 @@
-import { Box, TextField, Button, CardContent, Typography, Card } from "@mui/material";
+import { Box, TextField, Button, CardContent, Typography, Card, Snackbar, Alert } from "@mui/material";
 import { BaseUrl, api, adminControllerEndPoint, addQuestionEndPoint } from '../Constants/Constants';
 import Center from './Center';
 import { useState } from "react";
@@ -6,6 +6,9 @@ import { useState } from "react";
 function AddNewQuestion() {
 
     const [errors, setErrors] = useState({});
+    const [notification, setNotification] = useState();
+    const [notificationMsg, setNotificationMsg] = useState();
+    const [alertSuccess, setAlertSuccess] = useState();
 
     const Validate = (data) => {
         let bookTitle = data.get('bookTitle');
@@ -43,7 +46,11 @@ function AddNewQuestion() {
                 body: JSON.stringify(sendData)
             })
             .then(res => res.json())
-            .then(res => console.log(res))
+            .then(res => {
+                setNotification(true);
+                setNotificationMsg(res.message);
+                res.status == "Success" ? setAlertSuccess(true) : setAlertSuccess(false);
+            })
             .catch(console.error)
     }
 
@@ -52,7 +59,10 @@ function AddNewQuestion() {
         let data = new FormData(e.currentTarget);
         Validate(data);
         CreateQuestionInDb(data);
+    }
 
+    const closeSnackbar = () => {
+        setNotification(false);
     }
 
     return (
@@ -68,6 +78,12 @@ function AddNewQuestion() {
                             {errors.author ? <span style={{ color: 'red' }}>{errors.author}</span> : <span></span>}
                             <Button sx={{ width: '90%' }} type="submit" variant="contained" size="large">Create question</Button>
                         </form>
+                        {notification && <Snackbar
+                            open={notification}
+                            autoHideDuration={3000}
+                            onClose={closeSnackbar}>
+                            <Alert severity={alertSuccess ? "success" : "error"}  variant="filled">{notificationMsg}</Alert>
+                        </Snackbar>}
                     </Box>
                 </CardContent>
             </Card>
