@@ -13,6 +13,8 @@ function AddNewQuestion() {
     const Validate = (data) => {
         let bookTitle = data.get('bookTitle');
         let authorName = data.get('authorName');
+        let pointsReward = data.get('pointsReward');
+
         const errorList = {};
 
         if (!bookTitle) {
@@ -27,6 +29,11 @@ function AddNewQuestion() {
             errorList.author = "Author name must be more than 3 symbols.";
             setErrors(errorList);
         }
+        if(pointsReward < 1 || pointsReward > 20){
+            errorList.pointsReward = "Points reward must be between 1 and 20.";
+            setErrors(errorList);
+        }
+        return errorList;
     };
 
     const CreateQuestionInDb = (data) => {
@@ -57,8 +64,10 @@ function AddNewQuestion() {
     const AddQuestion = (e) => {
         e.preventDefault();
         let data = new FormData(e.currentTarget);
-        Validate(data);
-        CreateQuestionInDb(data);
+       let errorsList = Validate(data);
+       if(Object.keys(errorsList).length == 0){
+           CreateQuestionInDb(data);
+       }
     }
 
     const closeSnackbar = () => {
@@ -76,13 +85,15 @@ function AddNewQuestion() {
                             {errors.book ? <span style={{ color: 'red' }}>{errors.book}</span> : <span></span>}
                             <TextField name="authorName" id="outlined-basic" label="Author name" variant="outlined" />
                             {errors.author ? <span style={{ color: 'red' }}>{errors.author}</span> : <span></span>}
+                            <TextField type="number" name="pointsReward" id="outlined-basic" label="Points reward" variant="outlined" />
+                            {errors.pointsReward ? <span style={{ color: 'red' }}>{errors.pointsReward}</span> : <span></span>}
                             <Button sx={{ width: '90%' }} type="submit" variant="contained" size="large">Create question</Button>
                         </form>
                         {notification && <Snackbar
                             open={notification}
                             autoHideDuration={3000}
                             onClose={closeSnackbar}>
-                            <Alert severity={alertSuccess ? "success" : "error"}  variant="filled">{notificationMsg}</Alert>
+                            <Alert severity={alertSuccess ? "success" : "error"} variant="filled">{notificationMsg}</Alert>
                         </Snackbar>}
                     </Box>
                 </CardContent>

@@ -7,7 +7,7 @@ import { UserContext } from '../UserContext';
 
 function Register() {
 
-    const { setUser, setScore} = useContext(UserContext);
+    const { setUser, setScore } = useContext(UserContext);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
@@ -76,7 +76,6 @@ function Register() {
             errors.confirmPassword = 'Password and Confirm password must be the same.'
             setErrors(errors);
         }
-
         return errors;
     }
 

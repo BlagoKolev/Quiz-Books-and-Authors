@@ -15,8 +15,11 @@ function Login() {
         e.preventDefault();
         let formData = new FormData(e.currentTarget);
         let validateErrors = Validate(formData);
-        loginUser(formData);
-        navigate("/")
+        if (Object.keys(validateErrors).length == 0) {
+            loginUser(formData);
+            navigate("/")
+        }
+
 
     }
 
