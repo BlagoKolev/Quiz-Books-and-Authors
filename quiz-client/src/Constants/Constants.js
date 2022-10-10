@@ -7,3 +7,5 @@ export const questionEndPoint = 'Questions/';
 export const setScoreEndPoint = 'setScore/';
 export const addQuestionEndPoint = "addQuestion/";
 export const adminControllerEndPoint = 'Admins/';
+export const statistics = 'Statistics/';
+export const scoresEndPoint = 'scores/'

@@ -38,7 +38,7 @@ namespace quiz_server.Controllers
         //{
         //    return Ok(new { response = "Success", status = "Ok" });
         //}
-
+                
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] UserRegisterDto userToRegister)

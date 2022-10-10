@@ -1,6 +1,9 @@
-﻿namespace quiz_server.Services
+﻿using quiz_server.ModelsDto;
+
+namespace quiz_server.Services
 {
-    public class IStatisticsService
+    public interface IStatisticsService
     {
+        IEnumerable<StatisticsUserScoreDto> GetTopUsers();
     }
 }

@@ -83,6 +83,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IAccountsService, AccountsService>();
 builder.Services.AddTransient<IQuestionsService, QuestionsService>();
 builder.Services.AddTransient<IAdminsService, AdminsService>();
+builder.Services.AddTransient<IStatisticsService, StatisticsService>();
 
 var app = builder.Build();
 
