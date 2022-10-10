@@ -3,6 +3,7 @@ This is Application is build with :
 - ***Asp.Net Core Web API*** back-end
 - ***ReactJS*** front-end
 - ***JWT*** Authentication
+
 ## - This is a simple Quiz game where users must guess the author of some book.<br>- Every correct answer gives the user a different amount of points. <br>- These points are recorded in the database as the user's total score.<br>
 
 ### :couple: There are two main Roles:
