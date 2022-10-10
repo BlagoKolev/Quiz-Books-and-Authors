@@ -31,3 +31,31 @@ This is Application is build with :
 
 ## :camera: Screenshots
 ### Home page
+![home](https://user-images.githubusercontent.com/64737227/194850621-f32b6b68-dc0b-4680-a468-38512f36ecec.png)
+---
+### Login page
+![login](https://user-images.githubusercontent.com/64737227/194850624-025a1c17-5932-4e8a-bb20-f28f8d9222c3.png)
+---
+
+### Register page
+![register](https://user-images.githubusercontent.com/64737227/194850634-a3035f8e-9bcb-4d0b-9916-48299c8e7a79.png)
+---
+
+### Question 
+![question](https://user-images.githubusercontent.com/64737227/194850632-17fc883c-86fa-4449-b639-6523a6890cea.png)
+---
+
+### Correct answer
+![correct ansr](https://user-images.githubusercontent.com/64737227/194850617-5fd95b13-4b67-4938-9fb3-22f9d1e6d26f.png)
+---
+
+### Wrong answer
+![wrong ansr](https://user-images.githubusercontent.com/64737227/194850638-b83930bc-3363-48ca-8815-45a3eadb6050.png)
+---
+
+### Admin form to add new question to Quiz
+![new question](https://user-images.githubusercontent.com/64737227/194850628-0dc01019-91e1-4aaf-b8e7-71d5f0709a22.png)
+---
+
+
+
